@@ -1,0 +1,37 @@
+FROM registry.fedoraproject.org/fedora-toolbox:36
+
+# OS REFRESH & DOTNET & CLI
+
+RUN dnf upgrade -y \
+    && dnf install -y dotnet-sdk-6.0 \
+    && dnf install -y gh \
+    && dotnet tool install --global PowerShell \
+    && dnf clean all
+
+ENV PATH "/root/.dotnet/tools:$PATH"
+
+# python -> create a symlink if it doesn't exist yet
+RUN [ ! -f /usr/bin/python ] && ln -s ./python3 /usr/bin/python
+
+# CUSTOMIZATION
+
+WORKDIR /src
+COPY ./src .
+RUN \
+    ## bash
+    cat .bashrc >> /root/.bashrc \
+    ## git
+    && cp .gitconfig /root \
+    ## powershell
+    && mkdir -p /root/.config/powershell \
+    && cp profile.ps1 /root/.config/powershell \
+    ## wsl
+    && cp wsl.conf /etc
+
+WORKDIR /
+RUN rm -rf /src
+
+# END
+
+WORKDIR /
+CMD [ "bash" ]

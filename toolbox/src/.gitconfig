@@ -1,0 +1,3 @@
+[alias]
+    l = log --all --format=format:\"%C(auto)%h %d %s %C(cyan)(%an %ar)\" --graph -n 24
+    ll = log --all --format=format:\"%C(auto)%h %d %s %C(cyan)(%an %ar)\" --graph
