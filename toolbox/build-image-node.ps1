@@ -4,7 +4,7 @@ $tag = "jan8080/toolbox:node"
 # https://github.com/PowerShell/PowerShell/releases
 $PWSH_VERSION='7.2.3'
 # https://nodejs.org/en/download/releases/
-$NODE_VERSION='v18.0.0'
+$NODE_VERSION='v18.1.0'
 
 # build
 Write-Output "## image build ##"
